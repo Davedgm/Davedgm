@@ -1,0 +1,17 @@
+
+{
+  "name": "Study & Workout Plan",
+  "short_name": "StudyPlan",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "description": "Your daily study and workout planner",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2980b9"
+}

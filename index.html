@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Study & Workout Plan</title>
+<link rel="manifest" href="manifest.json">
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 20px; text-align: center; }
+  h1 { color: #2c3e50; }
+  .task-box { background: #fff; padding: 20px; margin: 15px auto; width: 90%; max-width: 400px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  .task-box h2 { color: #2980b9; }
+  .task-list { text-align: left; margin-top: 10px; }
+  .task-list li { margin-bottom: 8px; cursor: pointer; }
+  .done { text-decoration: line-through; color: gray; }
+  button { padding: 10px 20px; margin-top: 15px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  button:hover { background: #219150; }
+</style>
+</head>
+<body>
+
+<h1>Daily Study & Workout Plan</h1>
+<div class="task-box">
+  <h2 id="day-title">Day 1 Tasks</h2>
+  <ul class="task-list" id="task-list"></ul>
+  <button onclick="markAllDone()">Mark All Done</button>
+</div>
+
+<script>
+const plan = [
+  ["Biology — Review Cells (Plant vs Animal)", "Bodybuilding workout (Day 1 program)", "Math — Solve 3 easy algebra questions"],
+  ["Chemistry — Periodic Table basics", "Bodybuilding workout (Day 2 program)", "SAT practice — Logical reasoning exercises"],
+  ["Math — Geometry review", "Bodybuilding workout (Day 3 program)", "English reading comprehension practice"],
+  ["Physics — Motion and Forces basics", "Bodybuilding workout (Day 4 program)", "Biology — Simple quiz on Genetics"],
+  ["Chemistry — Bonding basics", "Bodybuilding workout (Day 5 program)", "SAT practice — Environmental science questions"],
+  ["Biology — Ecology intro", "Bodybuilding workout (Day 6 program)", "Math — Probability exercises"],
+  ["Review all subjects lightly", "Bodybuilding workout (Day 7 program)", "Past exam question practice"]
+];
+
+const today = new Date();
+const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const dayIndex = (Math.floor((today - startDate) / 86400000)) % 7;
+const tasks = plan[dayIndex];
+
+document.getElementById("day-title").innerText = `Day ${dayIndex + 1} Tasks`;
+const taskList = document.getElementById("task-list");
+tasks.forEach(task => {
+  const li = document.createElement("li");
+  li.innerText = task;
+  li.onclick = () => li.classList.toggle("done");
+  taskList.appendChild(li);
+});
+
+function markAllDone() {
+  document.querySelectorAll(".task-list li").forEach(li => li.classList.add("done"));
+}
+
+// Service Worker registration for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    console.log('Service Worker registered', reg);
+  }).catch(err => {
+    console.log('Service Worker failed', err);
+  });
+}
+</script>
+
+</body>
+</html>
